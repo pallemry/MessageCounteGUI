@@ -6,13 +6,20 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
-    <FileVersion>1.0.1</FileVersion>
+    <AssemblyVersion>1.0.4</AssemblyVersion>
+    <FileVersion>1.0.4</FileVersion>
+    <ApplicationIcon>Martz90-Circle-Plex.ico</ApplicationIcon>
+    <PackageReleaseNotes>Hotfix</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Martz90-Circle-Plex.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Clowd.Squirrel" Version="2.9.42" />
-    <PackageReference Include="WhatsappMessageCounterLibrary" Version="1.0.2" />
+    <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />
+    <PackageReference Include="WhatsappMessageCounterLibrary" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>

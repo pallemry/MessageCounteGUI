@@ -11,10 +11,16 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using MessageInformation.Extension;
+
+using Microsoft.WindowsAPICodePack.Taskbar;
+
 using WhatsappMessageCounterLibrary.Counter;
 using WhatsappMessageCounterLibrary.Data_Classes;
 
 using Squirrel;
+using Squirrel.Sources;
+
 // ReSharper disable LocalizableElement
 
 namespace MessageInformation
@@ -23,8 +29,8 @@ namespace MessageInformation
     {
         private Config config;
         private Dictionary<string, string> _specialCases = new ();
-        private string fileName = "";
-        private bool Scanning { get; set; }
+        private string? fileName = null;
+        public bool Scanning { get; private set; }
         public MainForm()
         {
             InitializeComponent();
@@ -32,10 +38,12 @@ namespace MessageInformation
 
             AddVersionNumber();
 
-            CheckForUpdates();
+            _ = CheckForUpdates();
+            
         }
 
-        private void InitializeProperties() { config = new Config(false); }
+        private void InitializeProperties() { config = new Config(false)
+        { AllowBracesInDate = true }; }
 
         private void AddVersionNumber()
         {
@@ -47,8 +55,9 @@ namespace MessageInformation
 
         private async Task CheckForUpdates()
         {
-            using var manager = new UpdateManager(@"D:\Deploy\Whatsapp Counter framework dependent");
+            using var manager = new UpdateManager(new GithubSource("https://github.com/pallemry/MessageCounteGUI", "", true));
             await manager.UpdateApp();
+
         }
 
         private void uploadFileButton_Click(object sender, EventArgs e)
@@ -146,7 +155,7 @@ namespace MessageInformation
                 return;
             }
 
-            Scanning = true;
+           
             if (fileName == null)
             {
                 Error("Upload a file first!");
@@ -171,36 +180,49 @@ namespace MessageInformation
             var jsonExists = File.Exists(config.AppDataPath + resultFileName + ".json");
             var shouldTxt = config.SaveOption is SaveOption.Normal or SaveOption.JsonAndNormal;
             var shouldJson = config.SaveOption is SaveOption.Json or SaveOption.JsonAndNormal;
-
             if ((txtExits && shouldTxt) || (shouldJson && jsonExists))
             {
                 Error($"File with the name: {resultFileName} already exits. Please choose a different name.");
                 return;
             }
+
+            Enabled = false;
+            Scanning = true;
             dataGridView2.Rows.Clear();
             var mc = new MessageCounter(config);
             Cursor = Cursors.WaitCursor;
-            mc.OnProgressChanged += (o, information) => {
-                Invoke(() => progressBar1.Value = information.Precentage);
-            };
-            var results = await mc.ScanMessagesAsync(fileName, resultFileName, _specialCases);
-            Cursor = Cursors.Default;
+            mc.OnProgressChanged += OnProgressChanged;
 
+            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal, Handle);
+            var results = await mc.ScanMessagesAsync(fileName, resultFileName, _specialCases);
             foreach (var record in results.SortedRecords)
             {
                 dataGridView2.Rows.Add(record.Key, record.Value.TotalMessages, record.Value.TotalWords);
             }
 
+
             totalMessagesLabel.Text = "Total Messages: " + results.TotalMessages;
             totalWordsLabel.Text = "Total Words: " + results.TotalWords;
-            
             if (File.Exists(results.SavedIn) || results.SavedIn != "Configured to not save")
             {
                 MessageBox.Show($"Successfully saved results into: {results.SavedIn}");
             }
 
+            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress, Handle);
             progressBar1.Value = 0;
+            Cursor = Cursors.Default;
             Scanning = false;
+            Enabled = true;
+        }
+
+        private void OnProgressChanged(object? o, ProgressionInformation information)
+        {
+            Invoke(() => {
+                progressBar1.Value = information.Precentage;
+                precentageLabel.Text = information.Precentage + "%";
+                precentageLabel.SyncXAxis(progressBar1);
+                TaskbarManager.Instance.SetProgressValue(information.Precentage, 100, Handle);
+            });
         }
 
         private static void Error(string errorMessage)

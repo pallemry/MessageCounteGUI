@@ -57,6 +57,7 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalMessages = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalWords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precentageLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dateLengthTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -158,8 +159,8 @@
             // dateLengthTrackBar
             // 
             this.dateLengthTrackBar.Location = new System.Drawing.Point(260, 78);
-            this.dateLengthTrackBar.Maximum = 20;
-            this.dateLengthTrackBar.Minimum = 10;
+            this.dateLengthTrackBar.Maximum = 35;
+            this.dateLengthTrackBar.Minimum = 1;
             this.dateLengthTrackBar.Name = "dateLengthTrackBar";
             this.dateLengthTrackBar.Size = new System.Drawing.Size(232, 45);
             this.dateLengthTrackBar.TabIndex = 8;
@@ -170,7 +171,7 @@
             // label4
             // 
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label4.Location = new System.Drawing.Point(260, 126);
+            this.label4.Location = new System.Drawing.Point(260, 128);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(232, 2);
             this.label4.TabIndex = 9;
@@ -179,7 +180,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(260, 139);
+            this.label5.Location = new System.Drawing.Point(260, 141);
             this.label5.MaximumSize = new System.Drawing.Size(232, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(97, 14);
@@ -190,7 +191,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(260, 164);
+            this.label6.Location = new System.Drawing.Point(260, 166);
             this.label6.MaximumSize = new System.Drawing.Size(232, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(112, 14);
@@ -205,7 +206,7 @@
             "Json",
             "Normal",
             "Json and Normal"});
-            this.saveAsFromatCombox.Location = new System.Drawing.Point(378, 161);
+            this.saveAsFromatCombox.Location = new System.Drawing.Point(378, 163);
             this.saveAsFromatCombox.Name = "saveAsFromatCombox";
             this.saveAsFromatCombox.Size = new System.Drawing.Size(114, 23);
             this.saveAsFromatCombox.TabIndex = 12;
@@ -215,7 +216,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(260, 187);
+            this.label7.Location = new System.Drawing.Point(260, 189);
             this.label7.MaximumSize = new System.Drawing.Size(232, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(129, 14);
@@ -224,7 +225,7 @@
             // 
             // resultFileNameTextBox
             // 
-            this.resultFileNameTextBox.Location = new System.Drawing.Point(260, 206);
+            this.resultFileNameTextBox.Location = new System.Drawing.Point(260, 208);
             this.resultFileNameTextBox.MaxLength = 30;
             this.resultFileNameTextBox.Name = "resultFileNameTextBox";
             this.resultFileNameTextBox.PlaceholderText = "Enter Result File Name..";
@@ -237,7 +238,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Names,
             this.Replacement});
-            this.dataGridView1.Location = new System.Drawing.Point(260, 259);
+            this.dataGridView1.Location = new System.Drawing.Point(260, 261);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(232, 222);
@@ -259,7 +260,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(260, 242);
+            this.label8.Location = new System.Drawing.Point(260, 244);
             this.label8.MaximumSize = new System.Drawing.Size(232, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(146, 14);
@@ -285,7 +286,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(506, 61);
+            this.progressBar1.Location = new System.Drawing.Point(506, 78);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(325, 23);
             this.progressBar1.TabIndex = 18;
@@ -294,7 +295,7 @@
             // 
             this.totalMessagesLabel.AutoSize = true;
             this.totalMessagesLabel.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.totalMessagesLabel.Location = new System.Drawing.Point(506, 96);
+            this.totalMessagesLabel.Location = new System.Drawing.Point(506, 104);
             this.totalMessagesLabel.MaximumSize = new System.Drawing.Size(232, 0);
             this.totalMessagesLabel.Name = "totalMessagesLabel";
             this.totalMessagesLabel.Size = new System.Drawing.Size(119, 14);
@@ -305,7 +306,7 @@
             // 
             this.totalWordsLabel.AutoSize = true;
             this.totalWordsLabel.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.totalWordsLabel.Location = new System.Drawing.Point(506, 114);
+            this.totalWordsLabel.Location = new System.Drawing.Point(506, 118);
             this.totalWordsLabel.MaximumSize = new System.Drawing.Size(232, 0);
             this.totalWordsLabel.Name = "totalWordsLabel";
             this.totalWordsLabel.Size = new System.Drawing.Size(95, 14);
@@ -321,7 +322,7 @@
             this.dataGridViewTextBoxColumn1,
             this.TotalMessages,
             this.TotalWords});
-            this.dataGridView2.Location = new System.Drawing.Point(506, 131);
+            this.dataGridView2.Location = new System.Drawing.Point(506, 135);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowTemplate.Height = 25;
@@ -346,13 +347,25 @@
             this.TotalWords.Name = "TotalWords";
             this.TotalWords.ReadOnly = true;
             // 
+            // precentageLabel
+            // 
+            this.precentageLabel.AutoSize = true;
+            this.precentageLabel.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.precentageLabel.Location = new System.Drawing.Point(803, 61);
+            this.precentageLabel.MaximumSize = new System.Drawing.Size(232, 0);
+            this.precentageLabel.Name = "precentageLabel";
+            this.precentageLabel.Size = new System.Drawing.Size(28, 14);
+            this.precentageLabel.TabIndex = 19;
+            this.precentageLabel.Text = "0%";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(843, 493);
+            this.ClientSize = new System.Drawing.Size(843, 491);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.totalWordsLabel);
+            this.Controls.Add(this.precentageLabel);
             this.Controls.Add(this.totalMessagesLabel);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button1);
@@ -373,9 +386,8 @@
             this.Controls.Add(this.fileChosenLabel);
             this.Controls.Add(this.fileContentPreviewRichTb);
             this.Controls.Add(this.uploadFileButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(859, 532);
-            this.MinimumSize = new System.Drawing.Size(859, 532);
             this.Name = "MainForm";
             this.Text = "Whatsapp message counter";
             ((System.ComponentModel.ISupportInitialize)(this.dateLengthTrackBar)).EndInit();
@@ -416,5 +428,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn TotalMessages;
         private DataGridViewTextBoxColumn TotalWords;
+        private Label precentageLabel;
     }
 }
