@@ -31,6 +31,7 @@ namespace MessageInformation
         private Dictionary<string, string> _specialCases = new ();
         private string? fileName = null;
         public bool Scanning { get; private set; }
+        
         public MainForm()
         {
             InitializeComponent();
